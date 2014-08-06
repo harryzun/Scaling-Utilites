@@ -1,0 +1,6 @@
+name=Scaling Utilities
+description=Tools for scaling actors.
+author=Harryzun
+website=http://hzn.la/files/scale-utils.php
+version=1.0
+compatibility=all

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!--
+
+1) Types
+[void, actor, actortype, boolean, camera, color, control, font, group, number, list, anything, region, scene, sound, text, dropdown]
+
+2) The Spec
+
+<block> - An entry for a custom block
+tag = unique name for block, only ABC and - (dash) allowed
+spec = like what you see in language files, use %0, %1, etc. to specify where the spaces go
+code = output code, use ~ to specify the blanks. Must match the order in which fields are specified.
+type = any of these [normal, action, wrapper, event]
+color = any of these [blue, cyan, green, lime, purple, red, gray, charcoal]
+returns = a TYPE
+
+<fields> - A list of fields that a block contains
+For children, the tag name corresponds to a TYPE. The order attribute starts at 0 and increments by 1. Do not skip values.
+
+If you wish to use a dropdown, look at the example below for syntax.
+
+3) Stuff that is not implemented yet
+
+- No support for embedded blocks yet.
+- No support for events.
+- This format will be reused for customized palettes in the future.
+
+-->
+
+<palette>
+	<block tag="getScale" spec="%0 scale percentage of %1" code="ScaleUtils.getScale(~, ~)" type="normal" color="blue" returns="number">
+		<fields>
+			<dropdown order="0">
+				<choices>
+					<c text="width" code="&quot;w&quot;"></c>
+					<c text="height" code="&quot;h&quot;"></c>
+				</choices>
+			</dropdown>
+			<actor order="1"></actor>
+		</fields>
+	</block>
+	<block tag="scaledCoord" spec="scaled %0 of %1" code="ScaleUtils.scaledCoord(~, ~)" type="normal" color="blue" returns="number">
+		<fields>
+			<dropdown order="0">
+				<choices>
+					<c text="x" code="&quot;x&quot;"></c>
+					<c text="y" code="&quot;y&quot;"></c>
+					<c text="x (on-screen)" code="&quot;xs&quot;"></c>
+					<c text="y (on-screen)" code="&quot;ys&quot;"></c>
+				</choices>
+			</dropdown>
+			<actor order="1"></actor>
+		</fields>
+	</block>
+	<block tag="offset" spec="scaled %0 for %1 of %2" code="ScaleUtils.offset(~, ~, ~)" type="normal" color="blue" returns="number">
+		<fields>
+			<number order="0"></number>
+			<dropdown order="1">
+				<choices>
+					<c text="x (absolute)" code="&quot;xa&quot;"></c>
+					<c text="y (absolute)" code="&quot;ya&quot;"></c>
+					<c text="x (relative)" code="&quot;xr&quot;"></c>
+					<c text="y (relative)" code="&quot;yr&quot;"></c>
+				</choices>
+			</dropdown>
+			<actor order="2"></actor>
+		</fields>
+	</block>
+	<block tag="scale" spec="scale %0 to %1 [pct] for %2" code="ScaleUtils.scale(~, ~, ~);" type="action" color="blue" returns="void">
+		<fields>
+			<dropdown order="0">
+				<choices>
+					<c text="size" code="&quot;size&quot;"></c>
+					<c text="width" code="&quot;width&quot;"></c>
+					<c text="height" code="&quot;height&quot;"></c>
+				</choices>
+			</dropdown>
+			<number order="1"></number>
+			<actor order="2"></actor>
+		</fields>
+	</block>
+	<block tag="setScale" spec="set %0 to %1 for %2" code="ScaleUtils.setScale(~, ~, ~);" type="action" color="blue" returns="void">
+		<fields>
+			<dropdown order="0">
+				<choices>
+					<c text="size" code="&quot;size&quot;"></c>
+					<c text="width" code="&quot;width&quot;"></c>
+					<c text="height" code="&quot;height&quot;"></c>
+				</choices>
+			</dropdown>
+			<number order="1"></number>
+			<actor order="2"></actor>
+		</fields>
+	</block>
+	<block tag="scaledSize" spec="scaled %0 of %1" code="ScaleUtils.scaledSize(~, ~)" type="normal" color="blue" returns="number">
+		<fields>
+			<dropdown order="0">
+				<choices>
+					<c text="width" code="&quot;width&quot;"></c>
+					<c text="height" code="&quot;height&quot;"></c>
+					<c text="half-width" code="&quot;halfwidth&quot;"></c>
+					<c text="half-height" code="&quot;halfheight&quot;"></c>
+				</choices>
+			</dropdown>
+			<actor order="1"></actor>
+		</fields>
+	</block>
+	<block tag="isScaled" spec="%0 is scaled" code="ScaleUtils.isScaled(~)" type="normal" color="blue" returns="boolean">
+		<fields>
+			<actor order="0"></actor>
+		</fields>
+	</block>
+</palette>
